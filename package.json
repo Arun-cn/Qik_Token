@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/Arun-cn/Qik_Token.git",
   "author": "Arun-cn <arunchandran4321@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
