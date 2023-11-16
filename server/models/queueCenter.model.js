@@ -10,6 +10,12 @@ const queueCenterSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    url:{
+        type: String,
+        required: true,
+        unique: true,
+        index: ture
+    },
     location: {
         type: String,
         trim: true
