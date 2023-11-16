@@ -2,11 +2,11 @@ import mongoose, { Schema } from "mongoose";
 
 const accessKeySchema = new mongoose.Schema({
     authUser: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     authGrantor: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     status:{
@@ -19,7 +19,7 @@ const accessKeySchema = new mongoose.Schema({
         enum: ['QueueCenter', 'Queue', 'Counter']
     },
     keyFor: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         refPath: 'key'
     }
 },{timestamps: true});
