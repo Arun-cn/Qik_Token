@@ -6,11 +6,11 @@ const counterSchema = new mongoose.Schema({
         trime: true
     },
     queue: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Queue"
     },
     admins: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'AccessKey'
     }
 });

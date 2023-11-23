@@ -30,19 +30,19 @@ const userSchema = mongoose.Schema(
     },
     tokens: [
       {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Token",
       },
     ],
     queues: [
       {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Queue",
       },
     ],
     accesskeys: [
       {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "AccessKey",
       },
     ],
@@ -50,7 +50,7 @@ const userSchema = mongoose.Schema(
   { timestamp: true }
 );
 
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
   next();
@@ -75,6 +75,6 @@ userSchema.methods.createAccessToken = async () => {
   );
 };
 
-const User = mongoose.Model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export { User };

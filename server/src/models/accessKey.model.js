@@ -24,6 +24,6 @@ const accessKeySchema = new mongoose.Schema({
     }
 },{timestamps: true});
 
-const AccessKey = mongoose.Model('AccessKey',accessKeySchema);
+const AccessKey = mongoose.model('AccessKey',accessKeySchema);
 
 export {AccessKey};

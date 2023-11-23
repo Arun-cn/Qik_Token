@@ -37,6 +37,6 @@ const queueCenterSchema = new mongoose.Schema({
     }]
 },{timestamps: true});
 
-const QueueCenter = mongoose.Model('QueueCenter',queueCenterSchema);
+const QueueCenter = mongoose.model('QueueCenter',queueCenterSchema);
 
 export {QueueCenter} ;

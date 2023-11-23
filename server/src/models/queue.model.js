@@ -48,6 +48,6 @@ const queueSchema = new mongoose.Schema({
     }]
 },{timestamps: true});
 
-const Queue = mongoose.Model("Queue",queueSchema);
+const Queue = mongoose.model("Queue",queueSchema);
 
 export {Queue}
