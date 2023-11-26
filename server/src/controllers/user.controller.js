@@ -39,4 +39,29 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
 
-export { registerUser };
+const userLogin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  // Email validation
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const isPasswordValid = password.length >= 8;
+
+    if (!isEmailValid || !isPasswordValid) {
+      throw new ApiError(400,"Invalid email or password")
+    }
+
+  // Password validation (at least 8 characters)
+
+  const user = await User.findOne({ email });
+
+  if (!user) throw new ApiError(400, "Invalid email or password");
+
+  const isPasswordMatch = await user.isPasswordCorrect(password);
+
+  if (!isPasswordMatch) throw new ApiError(401, "Invalid email or password");
+
+  return res.status(200).json(new ApiResponse(200, user, "Login successfully"));
+});
+
+export { registerUser, userLogin };
