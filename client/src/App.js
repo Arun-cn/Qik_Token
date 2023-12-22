@@ -1,12 +1,15 @@
 import "./App.css";
-import { Router,route } from "react-router-dom"
+import { Router,Route,Routes } from "react-router-dom"
 import {NavBar} from "./layout/NavBar/NavBar";
 function App() {
   return (
-    <div className="App">
+    
+    <Router>
       <NavBar />
-      quick queue
-    </div>
+      <Routes>
+        <Route path="/" element={''} />
+      </Routes>
+    </Router>
   );
 }
 
