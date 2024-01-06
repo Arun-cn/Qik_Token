@@ -2,7 +2,10 @@ import React from 'react'
 
 function index() {
   return (
-    <div>home</div>
+    <div>
+      <h1> home </h1>
+
+      </div>
   )
 }
 
