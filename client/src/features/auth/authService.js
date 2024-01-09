@@ -1,9 +1,9 @@
-import axios from "axios"
+import axiosInstance from "../../services/axiosInstance"
 
-const API_URL = "api/user/";
+const API_URL = "api/v1/auth/login";
 
 const login = async(userData) => {
-    const respose = await axios.post(API_URL, userData);
+    const respose = await axiosInstance.post(API_URL, userData);
 
     if(respose.data) {
         localStorage.setItem("user" ,JSON.stringify(respose.data));
