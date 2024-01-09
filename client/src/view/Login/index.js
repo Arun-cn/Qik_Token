@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import {useSelector, useDispatch} from "react-redux"
+import { login, logout } from '../../features/auth/auth.Slice';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Add your login logic here
-    console.log(`Logging in with username: ${username} and password: ${password}`);
+  const {user, isAuthicatted} = useSelector(
+    (state) => state.auth
+  );
+
+  const dispatch = useDispatch()
+
+  const HandleLogin = () => {
+    const userData = {
+      username,
+      password
+    }
+
+    dispatch(login(userData));
+    loguser()
+    console.log(`user: ${user}`)
   };
+
+  const loguser = async () =>{
+    await console.log(user)
+  }
 
   return (
     <div className="container mt-5">
@@ -33,7 +51,7 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleLogin}>
+        <Button variant="primary" onClick={HandleLogin}>
           Login
         </Button>
       </Form>
