@@ -15,7 +15,7 @@ function NavBar() {
     <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Qick Token</Navbar.Brand>
+          <Navbar.Brand href="/">Qick Token</Navbar.Brand>
           <Container className="ms-auto">
             <Button variant="primary" onClick={handleClick}>
               Login
