@@ -3,6 +3,21 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 
+const createRefreshTokenAndAccessToken = async (userId) => {
+  try {
+  const user = await User.findById(userId);
+  const accessToken = await user.createAccessToken();
+  const refreshToken = await user.createRefreshToken();
+
+  user.refreshToken = refreshToken;
+  await user.save({ validateBeforSave: false});
+
+  return { accessToken, refreshToken}
+  }catch (error){
+    throw new ApiError(500, "Something went wrong while generating referesh and access token");
+  }
+}
+
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, fullName, password } = req.body;
 
@@ -61,7 +76,18 @@ const userLogin = asyncHandler(async (req, res) => {
 
   if (!isPasswordMatch) throw new ApiError(401, "Invalid email or password");
 
-  return res.status(200).json(new ApiResponse(200, user, "Login successfully"));
+  const { refreshToken, accessToken} = await createRefreshTokenAndAccessToken(user._id);
+  const logedUser = await User.findById(user._id).select("-password -refreshToken");
+
+  const options ={
+    httpOnly: true,
+    secure: true
+  }
+  return res
+  .status(200)
+  .cookie("accesstoken", accessToken, options)
+  .cookie("refreshtoken", refreshToken, options)
+  .json(new ApiResponse(200, logedUser, "Login successfully"));
 });
 
 export { registerUser, userLogin };
