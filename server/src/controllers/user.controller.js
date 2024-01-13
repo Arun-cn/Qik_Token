@@ -4,11 +4,11 @@ import {ApiError} from "../utils/apiError.js"
 import {ApiResponse} from "../utils/apiResponse.js"
 
 const getUserController = asyncHandler(async (req, res) => {
-    const username = req.params.username;
-
+    const userId = req.user.userId;
+ 
     if (!userId) throw new ApiError(400,"Id required")
 
-    const user = User.findOne({username}).select("fullName queues");
+    const user = User.findById(userId).select("fullName queues");
 
     if(!user) throw new ApiError(400, "User not found");
 
@@ -22,11 +22,11 @@ const getUserController = asyncHandler(async (req, res) => {
 });
 
 const getUserProfileController = asyncHandler(async (req, res) => {
-    const {_Id} = req.user;
+    const _Id = req.user.userId;
 
     if (!_Id) throw new ApiError(400,"Id required")
 
-    const user = User.findById(_Id).select("fullName username queues");
+    const user = await User.findById(_Id).select("fullName username queues");
 
     if(!user) throw new ApiError(400, "User not found");
 

@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import {ApiError} from "../utils/apiError.js";
+import { ApiError } from "../utils/apiError.js";
 
 const requireAuth = async (req, res, next) => {
-  const token = req.headers.autherization;
+  const token = req.cookies.accesstoken;
 
   if (!token) {
     const unauthorizedError = new ApiError(
