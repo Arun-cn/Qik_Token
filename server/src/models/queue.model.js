@@ -1,53 +1,63 @@
 import mongoose, { Schema } from "mongoose";
 
-const queueSchema = new mongoose.Schema({
+const queueSchema = new mongoose.Schema(
+  {
     queueName: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     url: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
+      type: String,
+      unique: true,
+      index: true,
+      required: true,
     },
     location: {
-        type:String,
-        trim: true
+      type: String,
+      trim: true,
     },
     currentToken: {
-        type: Schema.Types.ObjectId,
-        ref: 'Token'
+      type: Schema.Types.ObjectId,
+      ref: "Token",
     },
     createdBy: {
-        createrType: {
-          type: String,
-          enum: ['User','organistion'],
-          required: true
-        },
-        createrId:{
-            type: Schema.Types.ObjectId,
-            refPath: 'createraType'
-        }
+      creatorType: {
+        type: String,
+        enum: ["User", "organistion"],
+        required: true,
+      },
+      creatorId: {
+        type: Schema.Types.ObjectId,
+        refPath: "createraType",
+      },
     },
-    createdAt: { 
-        type: Date, default: Date.now 
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
-    counters: [{
+    counters: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Counter'
-    }],
-    tokens: [{
+        ref: "Counter",
+      },
+    ],
+    tokens: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Token'
-    }],
-    admins: [{
+        ref: "Token",
+      },
+    ],
+    admins: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'AccessKey'
-    }]
-},{timestamps: true});
+        ref: "AccessKey",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-const Queue = mongoose.model("Queue",queueSchema);
+const Queue = mongoose.model("Queue", queueSchema);
 
-export {Queue}
+export { Queue };

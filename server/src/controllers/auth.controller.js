@@ -5,18 +5,21 @@ import { ApiResponse } from "../utils/apiResponse.js";
 
 const createRefreshTokenAndAccessToken = async (userId) => {
   try {
-  const user = await User.findById(userId);
-  const accessToken = await user.createAccessToken();
-  const refreshToken = await user.createRefreshToken();
+    const user = await User.findById(userId);
+    const accessToken = await user.createAccessToken();
+    const refreshToken = await user.createRefreshToken();
 
-  user.refreshToken = refreshToken;
-  await user.save({ validateBeforSave: false});
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforSave: false });
 
-  return { accessToken, refreshToken}
-  }catch (error){
-    throw new ApiError(500, "Something went wrong while generating referesh and access token");
+    return { accessToken, refreshToken };
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Something went wrong while generating referesh and access token"
+    );
   }
-}
+};
 
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, fullName, password } = req.body;
@@ -62,9 +65,9 @@ const userLogin = asyncHandler(async (req, res) => {
 
   const isPasswordValid = password.length >= 8;
 
-    if (!isEmailValid || !isPasswordValid) {
-      throw new ApiError(400,"Invalid email or password")
-    }
+  if (!isEmailValid || !isPasswordValid) {
+    throw new ApiError(400, "Invalid email or password");
+  }
 
   // Password validation (at least 8 characters)
 
@@ -76,18 +79,22 @@ const userLogin = asyncHandler(async (req, res) => {
 
   if (!isPasswordMatch) throw new ApiError(401, "Invalid email or password");
 
-  const { refreshToken, accessToken} = await createRefreshTokenAndAccessToken(user._id);
-  const logedUser = await User.findById(user._id).select("-password -refreshToken");
-
-  const options ={
+  const { refreshToken, accessToken } = await createRefreshTokenAndAccessToken(
+    user._id
+  );
+  const logedUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+  console.log(accessToken); // Only or dev
+  const options = {
     httpOnly: true,
-    secure: true
-  }
+    secure: true,
+  };
   return res
-  .status(200)
-  .cookie("accesstoken", accessToken, options)
-  .cookie("refreshtoken", refreshToken, options)
-  .json(new ApiResponse(200, logedUser, "Login successfully"));
+    .status(200)
+    .cookie("accesstoken", accessToken, options)
+    .cookie("refreshtoken", refreshToken, options)
+    .json(new ApiResponse(200, logedUser, "Login successfully"));
 });
 
 export { registerUser, userLogin };
