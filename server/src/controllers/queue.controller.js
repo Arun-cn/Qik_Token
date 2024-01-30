@@ -54,10 +54,11 @@ const getQueue = asyncHandler(async (req, res) => {
   if (!url) throw new ApiError(400, "Queue id requried");
 
   const queue = await Queue.findOne({ url });
-  
+
   if (!queue) throw new ApiError(400, "Queue not found");
 
   const responseQueue = {
+    id: queue._id,
     url: queue.url,
     name: queue.queueName,
     location: queue.location,
