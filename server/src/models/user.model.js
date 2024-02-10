@@ -28,18 +28,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    tokens: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Token",
-      },
-    ],
-    queues: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Queue",
-      },
-    ],
     accesskeys: [
       {
         type: Schema.Types.ObjectId,
