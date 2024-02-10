@@ -1,32 +1,40 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
-const tokenSchema = new mongoose.Schema({
+const tokenSchema = new mongoose.Schema(
+  {
     owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     queue: {
-        type: Schema.Types.ObjectId,
-        ref: 'Queue',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Queue",
+      required: true,
     },
     tokenNumber: {
-        type: Number,
-        required: true,
+      type: Number,
     },
     expireDate: {
-        type: Date,
-        expires: '1d'
+      type: Date,
     },
     status: {
-        type: String,
-        enum: ['Pending', 'Processing', 'Completed', 'Error', 'Canceled', 'Delivered', 'Checked'],
-        default: 'Pending'
-    }
+      type: String,
+      enum: [
+        "Pending",
+        "Processing",
+        "Completed",
+        "Error",
+        "Canceled",
+        "Delivered",
+        "Checked",
+      ],
+      default: "Pending",
+    },
+  },
+  { timestamp: true }
+);
 
-},{timestamp: true});
+const Token = mongoose.model("Token", tokenSchema);
 
-const Token = mongoose.model('Token',tokenSchema);
-
-export {Token};
+export { Token };
