@@ -21,6 +21,10 @@ const queueSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Token",
     },
+    lastGivenTokenNumber: {
+      type: Number,
+      default: 0,
+    },
     createdBy: {
       creatorType: {
         type: String,
@@ -40,12 +44,6 @@ const queueSchema = new mongoose.Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Counter",
-      },
-    ],
-    tokens: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Token",
       },
     ],
     admins: [

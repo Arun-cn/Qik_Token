@@ -1,7 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
-import { User } from "../models/user.model.js";
 import { Queue } from "../models/queue.model.js";
 
 const createQueue = asyncHandler(async (req, res) => {
@@ -28,18 +27,6 @@ const createQueue = asyncHandler(async (req, res) => {
       creatorId: creatorId,
     },
   });
-
-  if (creatorType === "User") {
-    console.log(userId);
-    const user = await User.findById(userId);
-    if (!user) throw new ApiError(400, "User not found");
-    user.queues.push(newQueue.id);
-    const newUser = await user.save();
-
-    if (!newUser) throw new ApiError(500, "queue not saved in user");
-  } else {
-    throw ApiError(400, "creator type not found");
-  }
 
   await newQueue.save();
 
