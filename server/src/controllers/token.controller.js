@@ -32,4 +32,24 @@ const createToken = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, newToken, "token creared successfully"));
 });
 
-export { createToken };
+const getNextToken = asyncHandler(async (req, res) => {
+  const { queueId, lastCalledNumber } = req.query;
+  // Convert lastCalledNumber to a number (if it's a string)
+  const lastCalledNumberInt = parseInt(lastCalledNumber);
+
+
+  // Find the token with the next highest token number after the last called number
+  const nextToken = await Token.findOne({ queue: queueId, tokenNumber: { $gt: lastCalledNumberInt } }).sort({ tokenNumber: 1 });
+ console.log(nextToken)
+  if (!nextToken) {
+    throw new ApiError(404, "No next token available for this queue");
+  }
+
+  return res.status(200).json(new ApiResponse(200, nextToken, "Next token retrieved successfully"));
+});
+
+
+export { 
+  createToken,
+  getNextToken
+};
