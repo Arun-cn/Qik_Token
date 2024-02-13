@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { Queue } from "../models/queue.model.js";
+import { Token } from "../models/token.model.js";
 
 const getUserController = asyncHandler(async (req, res) => {
   const userId = req.user.userId;
@@ -41,9 +42,7 @@ const getUserProfileController = asyncHandler(async (req, res) => {
 });
 
 const getUserQueues = asyncHandler(async (req, res) => {
-  console.log("starttrd");
   const userId = req.user.userId;
-  console.log(userId);
 
   if (!userId) throw new ApiError(400, "user id required");
 
@@ -55,4 +54,22 @@ const getUserQueues = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, queues, "queues feached successfully"));
 });
 
-export { getUserController, getUserProfileController, getUserQueues };
+const getUserTokens = asyncHandler(async (req, res) => {
+  const userId = req.user.userId;
+
+  if (!userId) throw new ApiError(400, "user id required");
+
+  const tokens = await Token.find({ owner: userId });
+
+  if (!tokens) throw new ApiError(500, "tokens not founded");
+  return res
+    .status(200)
+    .json(new ApiResponse(200, tokens, "tokens feached successfully"));
+});
+
+export {
+  getUserController,
+  getUserProfileController,
+  getUserQueues,
+  getUserTokens,
+};
