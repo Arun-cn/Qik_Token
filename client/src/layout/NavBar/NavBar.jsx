@@ -3,11 +3,24 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from '../../features/auth/auth.Slice';
+
 
 function NavBar() {
+  const dispatch = useDispatch();
+  const {user, isAuthicatted} = useSelector(
+    (state) => state.auth
+  );
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const HandleLogout = () => {
+    dispatch(logout());
+
+    navigate("/login");
+  };
+
+  const HandleLogin = () => {
     navigate("/login");
   };
 
@@ -17,9 +30,13 @@ function NavBar() {
         <Container>
           <Navbar.Brand href="/">Qick Token</Navbar.Brand>
           <Container className="ms-auto">
-            <Button variant="primary" onClick={handleClick}>
-              Login
-            </Button>
+          {isAuthicatted ? (
+        <Button variant="primary" onClick={HandleLogin}>
+          Login
+        </Button> ):
+       ( <Button variant="primary" onClick={HandleLogout}>
+          Logout
+        </Button>)}
           </Container>
         </Container>
       </Navbar>
