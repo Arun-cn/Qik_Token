@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import "./home.css"
+import Navbar from "../../layout/DashboradNavBar/DashBoardNavBar";
+import Sidebar from "../../layout/Slider/slider";
+import { Outlet } from "react-router-dom";
 
-function index() {
+const Layout = () => {
+  const [showSidebar, setShowSidebar] = useState(true);
+
+  const handleToggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
-    <div>
-      <h1> home </h1>
+    <Container fluid className='bg-info'>
+      <Row >
+        <Navbar /> 
+      </Row>
+      <Row>
+        <Col md={2} className="sidemenu ps-0">
+          <Sidebar />
+        </Col>
+        <Col md={10}>
+          <Outlet />
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-      </div>
-  )
-}
-
-export default index
+export default Layout;
