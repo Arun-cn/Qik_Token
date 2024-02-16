@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Card from "../../Components/TokenCard"
 function index() {
   return (
-    <div>index</div>
+    <div>
+      <Card name={"medical queue"} number={"6"} owner={"city hospital"} />
+    </div>
   )
 }
 
