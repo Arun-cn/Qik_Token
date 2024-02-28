@@ -11,7 +11,6 @@ export const fetchTokens = () => {
              dispatch(fetchTokensSuccess(data));
 
         } catch (error) {
-            console.log("calling tokens error and called fecherror reducer")
             dispatch(fetchTokensFailure(error.message))
         }
     }
