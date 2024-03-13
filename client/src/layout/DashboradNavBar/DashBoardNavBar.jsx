@@ -19,13 +19,7 @@ const Navigation = () => {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="/home">Home</Nav.Link>
-                  <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-                  <Nav.Link href="/profile">Profile</Nav.Link>
-                  <Nav.Link href="/tokens">Tokens</Nav.Link>
-                </Nav>
-                <Form className="d-flex">
+              <Form className="d-flex">
                   <Form.Control
                     type="search"
                     placeholder="Search"
@@ -34,6 +28,13 @@ const Navigation = () => {
                   />
                   <Button variant="outline-success">Search</Button>
                 </Form>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <Nav.Link href="/home">Home</Nav.Link>
+                  <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                  <Nav.Link href="/profile">Profile</Nav.Link>
+                  <Nav.Link href="/tokens">Tokens</Nav.Link>
+                  <Button variant="danger ">Logout</Button>
+                </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
