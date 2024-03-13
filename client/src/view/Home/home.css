@@ -1,6 +1,4 @@
-@media (max-width: 767px) {
-  .sidemenu {
-    display: none;
-  }
-}
 
+.sidemenu {
+  height: 100vh;
+}

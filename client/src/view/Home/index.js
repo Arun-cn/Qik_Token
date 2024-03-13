@@ -18,10 +18,10 @@ const Layout = () => {
         <Navbar /> 
       </Row>
       <Row>
-        <Col md={2} className="sidemenu ps-0">
+        <Col  md={2} className="sidemenu d-none d-md-block ">
           <Sidebar />
         </Col>
-        <Col md={10}>
+        <Col xs={12} md={10}>
           <Outlet />
         </Col>
       </Row>
