@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "../../features/auth/auth.Slice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../layout/Layout/Layout";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,9 +24,14 @@ const Login = () => {
     dispatch(login(userData));
   };
 
-  if (isAuthicatted) {
-    Navigate("/"); // Redirect to the home page if authenticated
-  }
+  useEffect(() =>{
+    if (isAuthicatted) {
+      navigate("/"); // Redirect to the home page if authenticated
+    }
+
+  },[isAuthicatted, navigate]);
+
+
 
   return (
     <Layout>
