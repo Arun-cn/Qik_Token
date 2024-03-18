@@ -7,9 +7,10 @@ import Register from "./view/Register/index";
 import PrivateRoute from "./routes/PrivateRoute";
 import DashBoard from "./view/DashBoard/DashBoard";
 import Profile from "./view/Profile/Profile";
-import Tokens from "./view/Tokens/index"
-import Queues from "./view/Queues/index"
-import Display from "./view/Display/index"
+import Tokens from "./view/Tokens/index";
+import Queues from "./view/Queues/index";
+import Display from "./view/Display/index";
+import CreateQueue from "./view/CreateQueue/index";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
             <Route path="/tokens" element={<Tokens />} />
             <Route path="/queues" element={<Queues />} />
             <Route path="/display" element={<Display />} />
+            <Route path="/createqueue" element={<CreateQueue />} />
+            
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />
