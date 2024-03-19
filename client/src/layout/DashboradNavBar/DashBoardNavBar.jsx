@@ -46,6 +46,10 @@ const handleLogout = (e) =>{
                   <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                   <Nav.Link href="/profile">Profile</Nav.Link>
                   <Nav.Link href="/tokens">Tokens</Nav.Link>
+                  <Nav.Link href="/queues">Queue</Nav.Link>
+                  <Nav.Link href="/display">Display</Nav.Link>
+
+
                   <Button variant="danger " onClick={handleLogout}>Logout</Button>
                 </Nav>
               </Offcanvas.Body>
