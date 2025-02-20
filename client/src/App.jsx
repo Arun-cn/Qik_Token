@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>qik token</h1>
+      <h1 className="text-3xl font-bold underline">qic token</h1>
     </>
   );
 }
