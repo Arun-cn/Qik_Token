@@ -1,11 +1,21 @@
 {
   "name": "Qik_Token",
   "version": "1.0.0",
-  "main": "server/index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "node server/index.js" 
+    "client": "yarn workspace client dev",
+    "server": "yarn workspace server start",
+    "dev": "concurrently \"yarn client\" \"yarn server\"",
+    "lint": "eslint 'packages/**/*.{js,jsx}'",
+    "test": "yarn workspaces run test"
   },
   "repository": "https://github.com/Arun-cn/Qik_Token.git",
   "author": "Arun-cn <arunchandran4321@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
 }
