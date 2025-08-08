@@ -1,21 +1,32 @@
 {
-  "name": "Qik_Token",
+  "name": "qik_token",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {
-    "client": "yarn workspace client dev",
-    "server": "yarn workspace server start",
-    "dev": "concurrently \"yarn client\" \"yarn server\"",
-    "lint": "eslint 'packages/**/*.{js,jsx}'",
-    "test": "yarn workspaces run test"
+  "directories": {
+    "doc": "docs"
   },
-  "repository": "https://github.com/Arun-cn/Qik_Token.git",
-  "author": "Arun-cn <arunchandran4321@gmail.com>",
-  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=client\" \"npm start --workspace=server\"",
+    "client": "npm run dev --workspace=client",
+    "server": "npm start --workspace=server",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test --workspaces"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@eslint/js": "^9.32.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "concurrently": "^9.2.0",
+    "eslint-plugin-react": "^7.37.5"
   }
 }
